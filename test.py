@@ -1,10 +1,14 @@
-import pandas as pd
+import heapq
 
-X_columns = ['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
-tt_train = pd.read_csv(r"C:\Users\gaura\OneDrive\Desktop\Code\PracticePython\dataforkgl\test.csv")
-X_0_test = tt_train[X_columns]
+def find_second_largest_heap(arr):
+    if len(arr) < 2:
+        return None
+    # nlargest(k, iterable) returns a list with the k largest elements
+    top_two = heapq.nlargest(2, list(set(arr))) 
+    if len(top_two) < 2:
+        return top_two[0]
+    return top_two[1]
 
-X_0_test['Embarked'] = X_0_test['Embarked'].fillna(X_0_test['Embarked'].mode()[0])
-
-
-print(tt_train['Embarked'].isnull().sort_values())
+my_list = [20, 20, 20]
+second_largest = find_second_largest_heap(my_list)
+print(f"The second largest number is: {second_largest}")
